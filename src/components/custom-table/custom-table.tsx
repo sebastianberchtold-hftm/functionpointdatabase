@@ -1,4 +1,4 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h, Prop, EventEmitter, Event } from '@stencil/core';
 
 @Component({
   tag: 'custom-table',
@@ -6,7 +6,17 @@ import { Component, h, Prop } from '@stencil/core';
   shadow: true,
 })
 export class CustomTable {
-  @Prop() tableData?: any[]; // Define prop to receive data
+  @Prop() tableData: any[] = [];
+  @Event() rowDeleted: EventEmitter<number>;
+  @Event() rowEdited: EventEmitter<number>;
+
+  handleDeleteRow(index: number) {
+    this.rowDeleted.emit(index);
+  }
+
+  handleEditRow(index: number) {
+    this.rowEdited.emit(index);
+  }
 
   render() {
     return (
@@ -14,6 +24,7 @@ export class CustomTable {
         <table>
           <thead>
             <tr>
+              <th>Action</th>
               <th>Name</th>
               <th>First Name</th>
               <th>Birthday</th>
@@ -23,6 +34,10 @@ export class CustomTable {
           <tbody>
             {this.tableData.map((row, rowIndex) => (
               <tr key={rowIndex}>
+                <td>
+                  <button onClick={() => this.handleDeleteRow(rowIndex)} class="action-button">❌</button>
+                  <button onClick={() => this.handleEditRow(rowIndex)} class="action-button">✏️</button>
+                </td>
                 <td>{row.name}</td>
                 <td>{row.vorname}</td>
                 <td>{row.birthday}</td>

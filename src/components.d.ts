@@ -17,7 +17,7 @@ export namespace Components {
     interface CustomForm {
     }
     interface CustomTable {
-        "tableData"?: any[];
+        "tableData": any[];
     }
 }
 declare global {
@@ -71,6 +71,8 @@ declare namespace LocalJSX {
         "onFormDataSubmitted"?: (event: CustomEvent<any>) => void;
     }
     interface CustomTable {
+        "onRowDeleted"?: (event: CustomEvent<number>) => void;
+        "onRowEdited"?: (event: CustomEvent<number>) => void;
         "tableData"?: any[];
     }
     interface IntrinsicElements {
