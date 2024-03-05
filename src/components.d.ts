@@ -14,6 +14,11 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface CustomForm {
+    }
+    interface CustomTable {
+        "tableData"?: any[];
+    }
 }
 declare global {
     interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
@@ -34,10 +39,24 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLCustomFormElement extends Components.CustomForm, HTMLStencilElement {
+    }
+    var HTMLCustomFormElement: {
+        prototype: HTMLCustomFormElement;
+        new (): HTMLCustomFormElement;
+    };
+    interface HTMLCustomTableElement extends Components.CustomTable, HTMLStencilElement {
+    }
+    var HTMLCustomTableElement: {
+        prototype: HTMLCustomTableElement;
+        new (): HTMLCustomTableElement;
+    };
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
+        "custom-form": HTMLCustomFormElement;
+        "custom-table": HTMLCustomTableElement;
     }
 }
 declare namespace LocalJSX {
@@ -48,10 +67,18 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface CustomForm {
+        "onFormDataSubmitted"?: (event: CustomEvent<any>) => void;
+    }
+    interface CustomTable {
+        "tableData"?: any[];
+    }
     interface IntrinsicElements {
         "app-home": AppHome;
         "app-profile": AppProfile;
         "app-root": AppRoot;
+        "custom-form": CustomForm;
+        "custom-table": CustomTable;
     }
 }
 export { LocalJSX as JSX };
@@ -61,6 +88,8 @@ declare module "@stencil/core" {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "custom-form": LocalJSX.CustomForm & JSXBase.HTMLAttributes<HTMLCustomFormElement>;
+            "custom-table": LocalJSX.CustomTable & JSXBase.HTMLAttributes<HTMLCustomTableElement>;
         }
     }
 }
